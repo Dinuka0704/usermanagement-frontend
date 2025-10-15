@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.users-button {
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(0, 208, 255);
+  cursor: pointer;
+}
+
