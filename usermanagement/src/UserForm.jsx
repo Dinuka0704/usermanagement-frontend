@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 
-const UserForm = ({addUser,submited}) => {
+const UserForm = ({addUser, submited, data,isEdit,updateUser}) => {
   const [id, setId] = useState("0");
   const [name, setName] = useState("");
 
@@ -14,6 +14,13 @@ const UserForm = ({addUser,submited}) => {
       setName("");
     }
   },[submited])
+
+  useEffect(() => {
+    if(data && data.id && data.id !== 0){
+      setId(data.id);
+      setName(data.name);
+    }
+  },[data]);
 
   return (
     <Grid
@@ -93,9 +100,9 @@ const UserForm = ({addUser,submited}) => {
         variant="contained"
         
 
-        onClick={()=> addUser({id,name})}
+        onClick={()=> isEdit? updateUser({id,name}) : addUser({id,name})}
       >
-        Submit
+        {isEdit? 'Update' : 'Add User'}
       </Button>
     </Grid>
   );

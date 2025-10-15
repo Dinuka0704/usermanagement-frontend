@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 function Users()  {
     const[users, setUsers] = useState([]);
     const[submited, setSubmited] = useState(false);
+    const[selectedUser, setSelectedUser]= useState([]);
+    const[isEdit,setIsEdit] = useState(false);
 
     useEffect(() => {
         getUsers();
@@ -42,15 +44,46 @@ function Users()  {
         })
     }
 
+    const updateUser = (data) => {
+        setSubmited(true);
+
+        const payload={
+            id: data.id,
+            name: data.name,
+        }
+
+    Axios.post("http://localhost:3001/api/updateUser", payload)
+        .then((response) => {
+            
+            getUsers();
+            setSubmited(false);
+            setIsEdit(false);
+            
+        })
+        .catch((error)=>{
+            console.error("Axios error:",error);
+        })    
+
+    }
+
     return (
 
         <Box >
             
             <UserForm 
                 addUser={addUser}
+                updateUser={updateUser}
                 submited={submited}
+                data={selectedUser}
+                isEdit={isEdit}
             />
-            <UsersTable  rows={users} />
+            <UsersTable 
+             rows={users}
+             selectedUser={data =>{
+                setSelectedUser(data);
+                setIsEdit(true);
+             }} 
+             />
         </Box>
     );
 }
