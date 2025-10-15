@@ -66,6 +66,18 @@ function Users()  {
 
     }
 
+    const deleteUser = (data) =>{
+
+    Axios.delete("http://localhost:3001/api/deleteUser", { data: data })
+        .then(() => {
+            getUsers();
+            
+        })
+        .catch((error)=>{
+            console.error("Axios error:",error);
+        })    
+    }
+
     return (
 
         <Box >
@@ -83,6 +95,7 @@ function Users()  {
                 setSelectedUser(data);
                 setIsEdit(true);
              }} 
+             deleteUser={data => window.confirm("Are you sure you want to delete this user?") && deleteUser(data)}
              />
         </Box>
     );

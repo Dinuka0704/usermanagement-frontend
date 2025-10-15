@@ -5,7 +5,7 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 
 const UserForm = ({addUser, submited, data,isEdit,updateUser}) => {
-  const [id, setId] = useState("0");
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
 
   useEffect(()=> {
