@@ -15,7 +15,7 @@ function Users()  {
     }, [])
 
     const getUsers = () => {
-        Axios.get("http://localhost:3001/api/users")
+        Axios.get(import.meta.env.VITE_REACT_APP_ENDPOINT + '/api/users')
         .then((response) => {
             console.log(response.data.response); 
             setUsers(response.data.response || []); 
@@ -32,7 +32,7 @@ function Users()  {
             id: data.id,
             name: data.name,
         }
-        Axios.post("http://localhost:3001/api/adduser", payload)
+        Axios.post(import.meta.env.VITE_REACT_APP_ENDPOINT + "/api/adduser", payload)
         .then((response) => {
             setUsers(response.data?.response || []);
             getUsers();
@@ -52,7 +52,7 @@ function Users()  {
             name: data.name,
         }
 
-    Axios.post("http://localhost:3001/api/updateUser", payload)
+    Axios.post(import.meta.env.VITE_REACT_APP_ENDPOINT + "/api/updateUser", payload)
         .then((response) => {
             
             getUsers();
@@ -68,7 +68,7 @@ function Users()  {
 
     const deleteUser = (data) =>{
 
-    Axios.delete("http://localhost:3001/api/deleteUser", { data: data })
+    Axios.delete(import.meta.env.VITE_REACT_APP_ENDPOINT + "/api/deleteUser", { data: data })
         .then(() => {
             getUsers();
             
